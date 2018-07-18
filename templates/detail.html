@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="container">
+    <div class="blog-header">
+        <h1 class="blog-title">{{ article.title }}</h1>
+        <h3>{{ article.subTitle }}</h3>
+        <p class="lead blog-description">{{ article.created_at }}</p>
+    </div>
+    <div class="row">
+        <div class="col-sm-8 blog-main">
+            <p>{{ article.content }}</p>
+            <br/>
+            <div>
+                {% for comment in comment_list %}
+                    <p>{{ comment.username }} : {{ comment.content }}</p>
+                    <p><small>{{ comment.created_at }}</small></p>
+                    <br/>
+                {% endfor %}
+            </div>
+            <div class="reply-form">
+                <form method="POST" action="" class="form-horizontal">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="input-username" class="col-sm-2 control-label">작성자</label>
+                        <input type="text" id="input-username" name="username" class="form-control"/>
+                        <label for="input-content" class="col-sm-2 control-label">댓글</label>
+                        <textarea class="form-control" rows="3" id="input-content" name="content"></textarea>
+                        <div class="reply-btn">
+                            <button type="submit" class="btn btn-default">댓글 달기</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-sm-3 col-sm-offset-1 blog-sidebar">
+            <div class="sidebar-module sidebar-module-inset">
+                <h4>Category</h4>
+                <ol class="list-unstyled">
+                    {% for category in category_list %}
+                        <li>
+                            <small>
+                                <a href="/articles/?category={{ category }}">{{ category }}</a>
+                            </small>
+                        </li>
+                    {% endfor %} 
+                </ol>
+            </div>
+            <div class="sidebar-module">
+                <h4>HashTag</h4>
+                <ol class="list-unstyled">
+                    {% if hashtag_list %}
+                        {% for hashtag in hashtag_list %}
+                        <li>
+                            <a href="/articles/?hashtag={{ hashtag }}">{{ hashtag.tag }}</a>
+                        </li>
+                        {% endfor %}
+                    {% endif %}
+                </ol>
+            </div>
+        </div>
+        <!-- /.blog-sidebar -->
+
+    </div>
+    <!-- /.row -->
+
+</div>
+<!-- /.container -->
+{% endblock %}

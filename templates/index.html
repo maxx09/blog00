@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="inner cover">
+    <h1 class="cover-heading">
+        <i class="fas fa-chevron-left" style="color:white"></i>
+        <span class="p-1">Welcome</span><span class="p-2">to</span><span class="p-3">maxx'</span><span class="p-4">blog</span><span>/</span>
+        <i class="fas fa-chevron-right" style="color:white"></i>
+    </h1>
+    <br/>
+    <p class="lead">maxx가 끄적이는 곳</p>
+    <br/>
+    <p class="lead">
+        <a href="{% url "list" %}" class="btn btn-lg btn-default">Go ! </a>
+    </p>
+</div>
+
+<div class="mastfoot"></div>
+{% endblock %}
